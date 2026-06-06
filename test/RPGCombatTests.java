@@ -20,4 +20,6 @@ public class RPGCombatTests {
     void CharacterStartsAtLevel1() {
         assertEquals(1, testCharacter.getLevel());
     }
+
+    
 }
