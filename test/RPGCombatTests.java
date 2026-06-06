@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RPGCombatTests {
 
@@ -21,5 +21,26 @@ public class RPGCombatTests {
         assertEquals(1, testCharacter.getLevel());
     }
 
-    
+    @Test
+    void isAliveTest(){
+        assertTrue(testCharacter.isAlive());
+    }
+
+    @Test
+    void isDeadTest(){
+        testCharacter.receiveDamage(1000);
+        assertFalse(testCharacter.isAlive());
+    }
+
+    @Test
+    void ifDamageExceedsHealthHealthAtZero(){
+        testCharacter.receiveDamage(1001);
+        assertEquals(0, testCharacter.getHealth());
+    }
+
+    @Test
+    void newCharacterCantGoAbove1000() {
+        testCharacter.heal(1);
+        assertEquals(1000, testCharacter.getHealth());
+    }
 }
