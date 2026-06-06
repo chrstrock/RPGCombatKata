@@ -22,8 +22,15 @@ public class RPGCharacter {
 
     public void receiveDamage(int damage) {
         //Damage subtracts from health. Health can't go below zero
-        if(damage > this.health) health = 0;
+
+        //attack can't be self-inflicted
+        if (damage > this.health) health = 0;
         else health -= damage;
+    }
+
+    public void attack(RPGCharacter target, int damage){
+        if( target == this) return;
+        target.receiveDamage(damage);
     }
 
     public void heal(int healthPoints) {

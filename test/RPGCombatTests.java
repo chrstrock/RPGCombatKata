@@ -43,4 +43,10 @@ public class RPGCombatTests {
         testCharacter.heal(1);
         assertEquals(1000, testCharacter.getHealth());
     }
+
+    @Test
+    void aCharacterCantDamageHimself(){
+        testCharacter.attack(testCharacter, 10);
+        assertEquals(1000, testCharacter.getHealth());
+    }
 }
