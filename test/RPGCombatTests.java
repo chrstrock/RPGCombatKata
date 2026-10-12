@@ -74,4 +74,15 @@ public class RPGCombatTests {
         }
         assertEquals(1500, testCharacter.getMaxHealth());
     }
+
+    @Test
+    void targetAtLeast5LevelsAboveDamageTest(){
+        //increase level of test character to 6
+        for(int i = 0; i < 6; i++){
+            testCharacter.levelUp();
+        }
+        RPGCharacter attacker = new RPGCharacter();
+        attacker.attack(testCharacter, 200);
+        assertEquals(900, testCharacter.getHealth());
+    }
 }

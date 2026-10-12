@@ -24,6 +24,9 @@ public class RPGCharacter {
 
     public void attack(RPGCharacter target, int damage) {
         if(target!=this) {
+            if(target.level >= this.level + 5) {
+                damage /= 2;
+            }
             target.receiveDamage(damage);
         }
         else{
