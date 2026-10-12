@@ -41,7 +41,29 @@ public class RPGCombatTests {
     @Test
     void aCharacterCannotAttackThemselvesTest(){
         RPGCharacter attacker = new RPGCharacter();
-        attacker.attack(attacker, 100);
-        assertThrows(InvalidParameterException.class, () -> {});
+        assertThrows(InvalidParameterException.class,()->attacker.attack(attacker, 100),
+                "Target character cannot be self.");
+    }
+
+    @Test
+    void aCharacterCanHealThemselvesTest(){
+        RPGCharacter attacker = new RPGCharacter();
+        attacker.attack(testCharacter, 200);
+        testCharacter.heal(100);
+        assertEquals(900, testCharacter.getHealth());
+    }
+
+    @Test
+    void deadCharacterCannotHealThemselvesTest(){
+        RPGCharacter attacker = new RPGCharacter();
+        attacker.attack(testCharacter, 1100);
+        assertEquals(0, testCharacter.getHealth());
+        assertThrows(UnsupportedOperationException.class, () -> testCharacter.heal(100),
+                "Dead characters cannot heal themselves.");
+    }
+
+    @Test
+    void maxHealthDefaultsAt1000Test(){
+        assertEquals(1000, testCharacter.getMaxHealth());
     }
 }
