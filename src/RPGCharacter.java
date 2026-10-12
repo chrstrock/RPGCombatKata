@@ -24,18 +24,19 @@ public class RPGCharacter {
 
     public void attack(RPGCharacter target, int damage) {
         if(target!=this) {
-            determineDamage(target, damage);
+            damage = determineDamage(target, damage);
         }
         else{
             throw new InvalidParameterException("Target character cannot be self.");
         }
+        target.receiveDamage(damage);
     }
 
-    private void determineDamage(RPGCharacter target, int damage) {
+    private int determineDamage(RPGCharacter target, int damage) {
         if(target.level >= this.level + 5) {
             damage /= 2;
         }
-        target.receiveDamage(damage);
+        return damage;
     }
 
     public void receiveDamage(int damage) {
