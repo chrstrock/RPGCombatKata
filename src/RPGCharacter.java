@@ -2,13 +2,15 @@ import java.security.InvalidParameterException;
 
 public class RPGCharacter {
 
-    private final int level;
+    private int level;
+    private int maxHealth;
     protected boolean isAlive;
     private int health;
     RPGCharacter() {
         this.health = 1000;
         this.level = 1;
         this.isAlive = true;
+        this.maxHealth = 1000;
     }
 
 
@@ -51,10 +53,13 @@ public class RPGCharacter {
     }
 
     public int getMaxHealth() {
-        int result = 1000;
-        if (this.level >= 6 ){
-            result = 1500;
+        return this.maxHealth;
+    }
+
+    public void levelUp() {
+        this.level++;
+        if(this.level == 6){
+            this.maxHealth = 1500;
         }
-        return result;
     }
 }

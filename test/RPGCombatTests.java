@@ -66,4 +66,12 @@ public class RPGCombatTests {
     void maxHealthDefaultsAt1000Test(){
         assertEquals(1000, testCharacter.getMaxHealth());
     }
+
+    @Test
+    void maxHealthAtLevel6Is1500Test(){
+        for(int i = 0; i < 6; i++){
+            this.testCharacter.levelUp();
+        }
+        assertEquals(1500, testCharacter.getMaxHealth());
+    }
 }
