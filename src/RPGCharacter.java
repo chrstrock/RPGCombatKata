@@ -36,6 +36,9 @@ public class RPGCharacter {
         if(target.level >= this.level + 5) {
             damage /= 2;
         }
+        else if(target.level <= this.level - 5) {
+            damage *= 2;
+        }
         return damage;
     }
 
