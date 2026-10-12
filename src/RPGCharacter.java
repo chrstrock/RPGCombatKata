@@ -52,8 +52,9 @@ public class RPGCharacter {
 
     public int getMaxHealth() {
         int result = 1000;
-        if this.level >= 6 {
+        if (this.level >= 6 ){
             result = 1500;
         }
+        return result;
     }
 }
