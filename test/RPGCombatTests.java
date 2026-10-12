@@ -95,4 +95,14 @@ public class RPGCombatTests {
         attacker.attack(testCharacter, 200);
         assertEquals(600, testCharacter.getHealth());
     }
+
+    @Test
+    void Level10ToLevel1Test(){
+        RPGCharacter attacker = new RPGCharacter();
+        for(int i = 0; i < 10; i++){
+            testCharacter.levelUp();
+        }
+        attacker.attack(testCharacter, 500);
+        assertEquals(750, testCharacter.getHealth());
+    }
 }
