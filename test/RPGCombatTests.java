@@ -105,4 +105,50 @@ public class RPGCombatTests {
         attacker.attack(testCharacter, 500);
         assertEquals(750, testCharacter.getHealth());
     }
+
+    @Test
+    void CharacterCannotHealPastMaxHealthTest(){
+        RPGCharacter attacker = new RPGCharacter();
+        attacker.attack(testCharacter, 200);
+        testCharacter.heal(300);
+        assertEquals(1000, testCharacter.getHealth());
+    }
+
+    @Test
+    void newCharactersHaveNoFactionsTest(){
+        assertEquals(0, this.testCharacter.getFactions().size());
+    }
+
+    @Test
+    void aCharacterMayHaveOneFactionTest(){
+        testCharacter.assignFaction("Warriors");
+        assertEquals(1, testCharacter.getFactions().size());
+    }
+
+    @Test
+    void aCharacterMayHaveTwoFactionsTest(){
+        testCharacter.assignFaction("Warrior");
+        testCharacter.assignFaction("Mage");
+        assertEquals(2, testCharacter.getFactions().size());
+        assertTrue(testCharacter.getFactions().contains("Warrior"));
+        assertTrue(testCharacter.getFactions().contains("Mage"));
+    }
+
+    @Test
+    void aCharacterMayLeaveAFactionTest(){
+        testCharacter.assignFaction("Warriors");
+        testCharacter.assignFaction("Mage");
+        testCharacter.leaveFaction("Warriors");
+        assertFalse(testCharacter.getFactions().contains("Warriors"));
+        assertEquals(testCharacter.getFactions().size(), 1);
+    }
+
+    @Test
+    void aCharacterWithSameFactionIsAllyTest(){
+        testCharacter.assignFaction("Warriors");
+        RPGCharacter ally = new RPGCharacter();
+        ally.assignFaction("Mages");
+        ally.assignFaction("Warriors");
+        assertTrue(RPGCharacter.isAlly(ally));
+    }
 }

@@ -1,7 +1,10 @@
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RPGCharacter {
 
+    private List<String> factions;
     private int level;
     private int maxHealth;
     protected boolean isAlive;
@@ -11,6 +14,16 @@ public class RPGCharacter {
         this.level = 1;
         this.isAlive = true;
         this.maxHealth = 1000;
+        this.factions = new ArrayList<>();
+    }
+
+    public static boolean isAlly(RPGCharacter ally) {
+        for(String faction : ally.factions) {
+            if (ally.factions.contains(faction)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
@@ -52,7 +65,7 @@ public class RPGCharacter {
 
     public void heal(int healingAmount) {
         if(isAlive) {
-            health += healingAmount;
+            this.health += Math.min(healingAmount, this.maxHealth - health);
         }
         else {
             throw new
@@ -70,5 +83,17 @@ public class RPGCharacter {
         if(this.level == 6){
             this.maxHealth = 1500;
         }
+    }
+
+    public List<String> getFactions() {
+        return this.factions;
+    }
+
+    public void assignFaction(String faction) {
+        this.factions.add(faction);
+    }
+
+    public void leaveFaction(String warriors) {
+        this.factions.remove(warriors);
     }
 }
