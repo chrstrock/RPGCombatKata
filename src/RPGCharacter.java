@@ -38,7 +38,11 @@ public class RPGCharacter {
     public void attack(RPGCharacter target, int damage) {
         if (target == this) {
             throw new InvalidParameterException("Target character cannot be self.");
-        } else {
+        }
+        else if(isAlly(target)) {
+            throw new UnsupportedOperationException("Allies cannot be attacked.");
+        }
+        else {
             target.receiveDamage(determineDamage(target, damage));
         }
     }

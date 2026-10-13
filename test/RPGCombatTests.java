@@ -151,4 +151,15 @@ public class RPGCombatTests {
         ally.assignFaction("Warriors");
         assertTrue(RPGCharacter.isAlly(ally));
     }
+
+    @Test
+    void alliesCannotDamageOneAnotherTest() {
+        testCharacter.assignFaction("Warriors");
+        RPGCharacter ally = new RPGCharacter();
+        ally.assignFaction("Mages");
+        ally.assignFaction("Warriors");
+        assertThrows(UnsupportedOperationException.class, () -> testCharacter.attack(ally, 100), "Allies cannot be attacked.");
+    }
+
+
 }
