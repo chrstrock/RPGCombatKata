@@ -23,9 +23,10 @@ public class RPGCharacter {
     }
 
     public void attack(RPGCharacter target, int damage) {
-        if(target!=this) target.receiveDamage(determineDamage(target, damage));
-        else{
+        if (target == this) {
             throw new InvalidParameterException("Target character cannot be self.");
+        } else {
+            target.receiveDamage(determineDamage(target, damage));
         }
     }
 
